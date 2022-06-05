@@ -52,3 +52,25 @@ plt.show()
 
 #observation: most of the apartement contains from 3 to 4 bedrooms
 
+#7-anomloies detection
+
+df=data.copy()
+df=df.dropna()[['price','sqft_lot']]
+
+stscaler = StandardScaler().fit(df)
+df = pd.DataFrame(stscaler.transform(df))
+print(df)
+df.describe()
+
+dbsc = DBSCAN(eps = 1.3, min_samples = 200).fit(df)
+labels = dbsc.labels_
+print(Counter(labels))
+
+outliers=df[dbsc.labels_==-1]
+
+#outliers
+plt.scatter(df[0],df[1])
+plt.scatter(outliers[0],outliers[1])
+plt.xlabel('Price')
+plt.ylabel('sqf_lot')
+plt.show()
