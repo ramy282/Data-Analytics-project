@@ -74,3 +74,23 @@ plt.scatter(outliers[0],outliers[1])
 plt.xlabel('Price')
 plt.ylabel('sqf_lot')
 plt.show()
+
+#8-Predictive Analysis
+train = data.drop(['id','price' ,'sqft_lot','date','condition' ,'zipcode', 'sqft_above' , 'yr_renovated','sqft_living15' ], axis=1)
+test = data ['price']
+
+xtrain , xtest , ytrain , ytest = train_test_split(train , test , test_size=0.3 , random_state=9)
+linear = LinearRegression()
+linear.fit(xtrain, ytrain)
+pred = linear.predict(xtest)
+print("prediction")
+print(pred)
+print("score: ")
+print(linear.score(xtest , ytest))
+
+model = RandomForestRegressor(n_estimators=90)
+model.fit(train , test)
+prediction = model.predict(train)
+print(model.feature_importances_)
+print("score: ")
+print(model.score(train , test))
