@@ -37,3 +37,27 @@ res= [i for i in res if not i in stops]
 
 print(res)
 
+#stemming & lemmtationztion
+print("Stremmer")
+for i in range(0,len(res)):
+    res1.append(stremmer.stem(res[i]))
+    print(res1[i])
+
+print("-"*100)
+print("-"*100)
+
+print("lemmatizer")
+for i in range(0,len(res)):
+    res[i]=lemmatizer.lemmatize(res[i])
+    print(res[i])
+
+#sentinment analysis
+text_file = open("C:\\Users\\Ramy Anwar\\Desktop\\Ramy\\data analytics\\data.csv", "r")
+data1 = text_file.readlines()
+
+for i in data1:
+    i=i.lower()
+    print(i , end=' ')
+    print(sia.polarity_scores(i))
+
+
